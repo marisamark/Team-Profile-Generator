@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="bg-success text-white jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="text-monospace text-uppercase display-4 font-weight-bold text-center">My Team</h1>
+            </div>
+        </div>
+
+        <div class="container justify-content-center">
+            <div class="row justify-content-center">
+                <div id="manager" class="card bg-success text-white mr-3 ml-3 mt-3 mb-3" style="width: 18rem;">
+                    <div class="card-header text-center">${data.role}</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-monospace text-center">
+                            ${data.name}</li>
+                        <li class="list-group-item text-monospace text-center">
+                            ${data.id}</li>
+                        <li class="list-group-item text-monospace text-center">
+                            ${data.email}</li>
+                        <li class="list-group-item text-monospace text-center">
+                            ${data.officenumber}</li>
+                    </ul>
+                </div>
+
+
+                <div id="engineer" class="card bg-success text-white mr-3 ml-3 mt-3 mb-3" style="width: 18rem;">
+                    <div class="card-header text-center">${data.role}</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-monospace text-center">
+                            ${data.name}</li>
+                        <li class="list-group-item text-monospace text-center">
+                            ${data.id}</li>
+                        <li class="list-group-item text-monospace text-center">
+                            ${data.email}</li>
+                        <li class="list-group-item text-monospace text-center">
+                            ${data.GitHubprofile}</li>
+                    </ul>
+                </div>
+
+
+                <div id="intern" class="card bg-success text-white mr-3 ml-3 mt-3 mb-3" style="width: 18rem;">
+                    <div class="card-header text-center">${data.role}</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-monospace text-center">
+                            ${data.name}</li>
+                        <li class="list-group-item text-monospace text-center">
+                            ${data.id}</li>
+                        <li class="list-group-item text-monospace text-center">
+                            ${data.email}</li>
+                        <li class="list-group-item text-monospace text-center">
+                            ${data.school}</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
