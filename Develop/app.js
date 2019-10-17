@@ -2,51 +2,51 @@ const inquirer = require('inquirer');
 const open = require('open');
 const path = require('path');
 const fs = require('fs');
-const { Manager, Employee, Intern, CreateHTML } = require('./lib');
-const generateHTML = require('./generateHTML');
+const { Manager, Employee, Intern, Engineer } = require('./lib');
+const generateHTML = require('./GenerateHTML');
 
 const idArray = [];
 const empArray = [];
 
 const new_questions = {
-    makeTeamQuestion: {
+    makeTeamQuestion: [{
         type: "list",
-        choices: ["engineer", "intern", "manager", "finished creating team!"],
+        choices: ["Engineer", "Intern", "finished creating team!"],
         name: "role",
-        message: "What is the role of the team member?"
-    },
+        message: "What is the role of the team member you would like to add?"
+    }],
     makeManager: [
         {
             name: "name",
             type: "input",
-            message: "What Name would you like?",
-            validate: function (val) {
-                return val.length > 0
-            }
+            message: "What is the name of your manager?",
+            // validate: function (val) {
+            //     return val.length > 0
+            // }
         },
         {
             name: "id",
             type: "input",
             message: "What unique Id would you like?",
-            validate: function (val) {
-                return !idArray.includes(val)
-            }
+            // validate: function (val) {
+            //     return !idArray.includes(val)
+            // }
         },
         {
             name: "email",
             type: "input",
             message: "What Email would you like?",
-            validate: function (val) {
-                return val.includes("@")
-            }
+            // validate: function (val) {
+            //     // return val.includes("@")
+            // }
         },
         {
             name: "officeNumber",
             type: "input",
-            message: "What Office would you like?",
-            validate: function (val) {
-                return !isNaN(val)
-            }
+            message: "What is their office number?",
+            // validate: function (val) {
+            //     // return !isNaN(val)
+            // }
         },
     ],
 
@@ -54,92 +54,153 @@ const new_questions = {
         {
             name: "name",
             type: "input",
-            message: "What Name would you like?",
-            validate: function (val) {
-                return val.length > 0
-            }
+            message: "What is their name?",
+            // validate: function (val) {
+            //     return val.length > 0
+            // }
         },
         {
             name: "id",
             type: "input",
             message: "What unique Id would you like?",
-            validate: function (val) {
-                return !idArray.includes(val)
-            }
+            // validate: function (val) {
+            //     return !idArray.includes(val)
+            // }
         },
         {
             name: "email",
             type: "input",
-            message: "What Email would you like?",
-            validate: function (val) {
-                return val.includes("@")
-            }
+            message: "What is their email?",
+            // validate: function (val) {
+            //     // return val.includes("@")
+            // }
         },
         {
             name: "GitHubprofile",
             type: "input",
             message: "What is the link to their Github profile?",
-            validate: function (val) {
-                return val.includes("git")
-            }
+            // validate: function (val) {
+            //     // return val.includes("git")
+            // }
         },
     ],
-    
+
     makeIntern: [
         {
             name: "name",
             type: "input",
-            message: "What Name would you like?",
-            validate: function (val) {
-                return val.length > 0
-            }
+            message: "What is their name?",
+            // validate: function (val) {
+            //     return val.length > 0
+            // }
         },
         {
             name: "id",
             type: "input",
             message: "What unique Id would you like?",
-            validate: function (val) {
-                return !idArray.includes(val)
-            }
+            // validate: function (val) {
+            //     return !idArray.includes(val)
+            // }
         },
         {
             name: "email",
             type: "input",
-            message: "What Email would you like?",
-            validate: function (val) {
-                return val.includes("@")
-            }
+            message: "What is their email?",
+            // validate: function (val) {
+            //     return val.includes("@")
+            // }
         },
         {
             name: "school",
             type: "input",
             message: "What is the name of the school of the team member?",
-            validate: function (val) {
-                return val.length > 0
-            }
+            // validate: function (val) {
+            //     return val.length > 0
+            // }
         },
     ]
+}
+
+async function createManager() {
+    try {
+        let { name, id, email, officeNumber } = await inquirer.prompt(new_questions["makeManager"]);
+        empArray.push(new Manager(name, id, email, officeNumber));
+        // console.log(empArray)
+        let rval = await buildTeam();
+        // console.log('saving', empArray)
+        return rval;
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+async function buildTeam() {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const { role } = await inquirer.prompt(new_questions["makeTeamQuestion"]);
+            switch (role) {
+                case 'Intern': {
+                    let { name, id, email, school } = await createIntern();
+                    empArray.push(new Intern(name, id, email, school));
+                    // console.log(empArray);
+                    await buildTeam();
+                    resolve()
+                }
+                    break;
+
+                case 'Engineer': {
+                    let { name, id, email, GitHubprofile } = await createEngineer();
+                    empArray.push(new Engineer(name, id, email, GitHubprofile));
+                    // console.log(empArray);
+                    await buildTeam();
+                    resolve()
+                }
+                    break;
+
+                case 'finished creating team!':
+                    // console.log(empArray);
+                    resolve();
+
+                    break;
+                default:
+                    console.log("ERR")
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    })
+}
+
+
+async function createIntern() {
+    try {
+        return inquirer.prompt(new_questions["makeIntern"]);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function createEngineer() {
+    try {
+        return inquirer.prompt(new_questions["makeEngineer"]);
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 
 async function initAsync() {
     try {
-        let data = {};
-        const {role, name, id, email, officeNumber, GitHubprofile, school} = await inquirer.prompt(new_questions);
-        data.role = role;
-        data.name = name;
-        data.id= id;
-        data.email = email;
-        data.officeNumber = officeNumber;
-        data.GitHubprofile = GitHubprofile;
-        data.school = school;
+        await createManager();
+        const html = await generateHTML(empArray);
 
-        const html = generateHTML(data);
-
-        function writeToFile(data) {
+        function writeToFile(empArray) {
             fs.writeFile('index.html', html, function (err) {
                 if (err) throw err;
-                console.log('Saved!');
+                console.log(empArray);
             });
         }
 
@@ -151,66 +212,10 @@ async function initAsync() {
 };
 
 initAsync();
-Start();
-async function Start() {
-    try {
-        const { role } = await inquirer.prompt(new_questions["makeTeamQuestion"]);
-        switch (role) {
-            case 'manager':
-                return createManager();
-            case 'intern':
-                return createIntern();
-            case 'engineer':
-                return createEngineer();
-            case 'finished creating team!':
-                return createHTMLOutput();
-            default:
-                console.log("ERR")
-        }
 
-    } catch (error) {
-        console.log(error)
-    }
-}
-async function createManager() {
-    try {
-        const { name, id, email, officeNumber } = await inquirer.prompt(new_questions["makeManager"]);
-        empArray.push(new Manager(name, id, email, officeNumber));
 
-        // Start()
-    } catch (error) {
-        console.log(error)
-    }
-}
 
-async function createEngineer() {
-    try {
-        const { name, id, email, GitHubprofile } = await inquirer.prompt(new_questions["makeEngineer"]);
-        empArray.push(new Engineer(name, id, email, GitHubprofile));
 
-        // Start()
-    } catch (error) {
-        console.log(error)
-    }
-}
 
-async function createIntern() {
-    try {
-        const { name, id, email, school } = await inquirer.prompt(new_questions["makeIntern"]);
-        empArray.push(new Intern(name, id, email, school));
 
-        // Start()
-    } catch (error) {
-        console.log(error)
-    }
-}
 
-//do i still need this
-async function createHTMLOutput(){
-    try {
-        const html = await CreateHTML(empArray);
-        console.log(html)
-    } catch (error) {
-        console.log(error)
-    }
-}

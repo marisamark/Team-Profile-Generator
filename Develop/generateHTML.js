@@ -1,6 +1,33 @@
 
-function generateHTML(data) {
-    return `<!DOCTYPE html>
+function getContent(empArray) {
+    console.log(empArray)
+    return `<div> ${createCard(empArray)}</div>`;
+
+}
+
+
+
+
+function createCard(empArray) {
+    return empArray.map(element => {
+        return `
+            <div class="card bg-success text-white mr-3 ml-3 mt-3 mb-3" style="width: 18rem;">
+            <div class="card-header text-center">${empArray.role}</div>
+            <div class="card-header text-center">${empArray.name}</div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-monospace text-center">
+                    ${empArray.id}</li>
+                <li class="list-group-item text-monospace text-center">
+                    ${empArray.email}</li>
+            </ul>
+        </div>`;
+    });
+
+}
+
+async function generateHTML(empArray) {
+    try {
+        return `<!DOCTYPE html>
     <html lang="en">
     
     <head>
@@ -16,67 +43,23 @@ function generateHTML(data) {
     </head>
     
     <body>
-        <div class="container">
-            <div class="bg-success text-white jumbotron jumbotron-fluid">
-                <div class="container">
-                    <h1 class="text-monospace text-uppercase display-4 font-weight-bold text-center">My Team</h1>
-                </div>
-            </div>
-    
-            <div class="container justify-content-center">
-                <div class="row justify-content-center">
-                    <div id="manager" class="card bg-success text-white mr-3 ml-3 mt-3 mb-3" style="width: 18rem;">
-                        <div class="card-header text-center">${data.role}</div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item text-monospace text-center">
-                                ${data.name}</li>
-                            <li class="list-group-item text-monospace text-center">
-                                ${data.id}</li>
-                            <li class="list-group-item text-monospace text-center">
-                                ${data.email}</li>
-                            <li class="list-group-item text-monospace text-center">
-                                ${data.officenumber}</li>
-                        </ul>
-                    </div>
-    
-    
-                    <div id="engineer" class="card bg-success text-white mr-3 ml-3 mt-3 mb-3" style="width: 18rem;">
-                        <div class="card-header text-center">${data.role}</div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item text-monospace text-center">
-                                ${data.name}</li>
-                            <li class="list-group-item text-monospace text-center">
-                                ${data.id}</li>
-                            <li class="list-group-item text-monospace text-center">
-                                ${data.email}</li>
-                            <li class="list-group-item text-monospace text-center">
-                                ${data.GitHubprofile}</li>
-                        </ul>
-                    </div>
-    
-    
-                    <div id="intern" class="card bg-success text-white mr-3 ml-3 mt-3 mb-3" style="width: 18rem;">
-                        <div class="card-header text-center">${data.role}</div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item text-monospace text-center">
-                                ${data.name}</li>
-                            <li class="list-group-item text-monospace text-center">
-                                ${data.id}</li>
-                            <li class="list-group-item text-monospace text-center">
-                                ${data.email}</li>
-                            <li class="list-group-item text-monospace text-center">
-                                ${data.school}</li>
-                        </ul>
-                    </div>
-    
-                </div>
-    
-            </div>
-    
-        </div>
-    
+    <div class="jumbotron jumbotron-fluid bg-success text-white">
+    <div class="container">
+      <h1 class="display-4 text-center font-weight-bold text-monospace">My team</h1>
+
+    </div>
+  </div>
+
+    <div> 
+    ${getContent(empArray)}
+    </div>
+   
     </body>
     </html>`
- 
+
+    } catch (err) {
+
+    }
 }
+
 module.exports = generateHTML
