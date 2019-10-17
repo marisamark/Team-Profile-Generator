@@ -172,3 +172,67 @@ You are required to submit the following:
 * The URL of the GitHub repository
 
 - - -
+
+
+    if (getRole() === "Manager") {
+        return empArray.map(employee => {
+            return `
+                <div class="card bg-success text-white mr-3 ml-3 mt-3 mb-3" style="width: 18rem;">
+                <div class="card-header text-center">${employee.getRole()}</div>
+                <div class="card-header text-center">${employee.name}</div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-monospace text-center text-success">
+                        ${employee.id}</li>
+                    <li class="list-group-item text-monospace text-center text-success">
+                        ${employee.email}</li>
+                    <li class="list-group-item text-monospace text-center text-success">
+                        ${employee.officeNumber}</li>
+                </ul>
+            </div>`;
+        });
+
+    }
+    
+    else if (getRole() === "Intern") {
+        return empArray.map(employee => {
+            return `
+                <div class="card bg-success text-white mr-3 ml-3 mt-3 mb-3" style="width: 18rem;">
+                <div class="card-header text-center">${employee.getRole()}</div>
+                <div class="card-header text-center">${employee.name}</div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-monospace text-center text-success">
+                        ${employee.id}</li>
+                    <li class="list-group-item text-monospace text-center text-success">
+                        ${employee.email}</li>
+                    <li class="list-group-item text-monospace text-center text-success">
+                        ${employee.school}</li>
+                </ul>
+            </div>`;
+        });
+    }
+    else if (getRole() === "Engineer") {
+        return empArray.map(employee => {
+            return `
+                <div class="card bg-success text-white mr-3 ml-3 mt-3 mb-3" style="width: 18rem;">
+                <div class="card-header text-center">${employee.getRole()}</div>
+                <div class="card-header text-center">${employee.name}</div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-monospace text-center text-success">
+                        ${employee.id}</li>
+                    <li class="list-group-item text-monospace text-center text-success">
+                        ${employee.email}</li>
+                    <li class="list-group-item text-monospace text-center text-success">
+                        ${employee.GitHubprofile}</li>
+                </ul>
+            </div>`;
+        });
+    }
+
+
+
+                    <li class="list-group-item text-monospace text-center text-success">
+                    ${employee.officeNumber}</li>
+                <li class="list-group-item text-monospace text-center text-success">
+                    ${employee.school}</li>
+                <li class="list-group-item text-monospace text-center text-success">
+                    ${employee.GitHubprofile}</li>

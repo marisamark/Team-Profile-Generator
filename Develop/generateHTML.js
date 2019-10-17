@@ -2,28 +2,50 @@
 function getContent(empArray) {
     console.log(empArray)
     return `<div> ${createCard(empArray)}</div>`;
-
 }
-
-
 
 
 function createCard(empArray) {
-    return empArray.map(element => {
+
+    return empArray.map(employee => {
         return `
             <div class="card bg-success text-white mr-3 ml-3 mt-3 mb-3" style="width: 18rem;">
-            <div class="card-header text-center">${empArray.role}</div>
-            <div class="card-header text-center">${empArray.name}</div>
+            <div class="card-header text-center">${employee.getRole()}</div>
+            <div class="card-header text-center">${employee.name}</div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item text-monospace text-center">
-                    ${empArray.id}</li>
-                <li class="list-group-item text-monospace text-center">
-                    ${empArray.email}</li>
+                <li class="list-group-item text-monospace text-center text-success">
+                    ${employee.id}</li>
+                <li class="list-group-item text-monospace text-center text-success">
+                    ${employee.email}</li>
+                
+
             </ul>
+
         </div>`;
+
     });
 
 }
+console.log(createCardlowerdiv())
+function createCardlowerdiv(employee){
+    try {
+        switch (employee.getRole()) {
+            case 'Manager': {
+                `<li class="list-group-item text-monospace text-center text-success">
+                ${employee.officeNumber}</li>`}
+            case 'Intern': {
+                `<li class="list-group-item text-monospace text-center text-success">
+                ${employee.school}</li>`}
+            case 'Engineer': {
+                `<li class="list-group-item text-monospace text-center text-success">
+                ${employee.GitHubprofile}</li>`}
+
+        }
+    } catch (error) {
+    console.log(error)
+}
+}
+
 
 async function generateHTML(empArray) {
     try {
@@ -61,5 +83,9 @@ async function generateHTML(empArray) {
 
     }
 }
+
+
+
+
 
 module.exports = generateHTML
