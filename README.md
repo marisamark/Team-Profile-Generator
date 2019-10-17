@@ -1,2 +1,3 @@
 # Team-Profile-Generator
-software engineering team generator command line application
+This is a software engineering team generator command line application. This allows a manager to generate a webpage that displays their team's basic info
+so that they can have a library of their employee's information. The application asks a series of questions and then generates a HTML with the data inputted from the user. A card is made for each team member. All employees listed must include their role (Engineer/Intern), their Name, an ID, and email. For an engineer, the prompt also asks for their GitHub profile whereas for an intern, the prompt asks for their school. I also added validate functions for each prompt to ensure that the user must include things such as "@" when asked for their email and the string "git" when asked to input their engineer's GitHub profile. 

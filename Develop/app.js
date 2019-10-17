@@ -20,33 +20,33 @@ const new_questions = {
             name: "name",
             type: "input",
             message: "What is the name of your manager?",
-            // validate: function (val) {
-            //     return val.length > 0
-            // }
+            validate: function (val) {
+                return val.length > 0
+            }
         },
         {
             name: "id",
             type: "input",
             message: "What unique Id would you like?",
-            // validate: function (val) {
-            //     return !idArray.includes(val)
-            // }
+            validate: function (val) {
+                return !idArray.includes(val)
+            }
         },
         {
             name: "email",
             type: "input",
             message: "What Email would you like?",
-            // validate: function (val) {
-            //     // return val.includes("@")
-            // }
+            validate: function (val) {
+                return val.includes("@")
+            }
         },
         {
             name: "officeNumber",
             type: "input",
             message: "What is their office number?",
-            // validate: function (val) {
-            //     // return !isNaN(val)
-            // }
+            validate: function (val) {
+                return !isNaN(val)
+            }
         },
     ],
 
@@ -55,33 +55,33 @@ const new_questions = {
             name: "name",
             type: "input",
             message: "What is their name?",
-            // validate: function (val) {
-            //     return val.length > 0
-            // }
+            validate: function (val) {
+                return val.length > 0
+            }
         },
         {
             name: "id",
             type: "input",
             message: "What unique Id would you like?",
-            // validate: function (val) {
-            //     return !idArray.includes(val)
-            // }
+            validate: function (val) {
+                return !idArray.includes(val)
+            }
         },
         {
             name: "email",
             type: "input",
             message: "What is their email?",
-            // validate: function (val) {
-            //     // return val.includes("@")
-            // }
+            validate: function (val) {
+                return val.includes("@")
+            }
         },
         {
             name: "GitHubprofile",
             type: "input",
             message: "What is the link to their Github profile?",
-            // validate: function (val) {
-            //     // return val.includes("git")
-            // }
+            validate: function (val) {
+                return val.includes("git")
+            }
         },
     ],
 
@@ -90,33 +90,33 @@ const new_questions = {
             name: "name",
             type: "input",
             message: "What is their name?",
-            // validate: function (val) {
-            //     return val.length > 0
-            // }
+            validate: function (val) {
+                return val.length > 0
+            }
         },
         {
             name: "id",
             type: "input",
             message: "What unique Id would you like?",
-            // validate: function (val) {
-            //     return !idArray.includes(val)
-            // }
+            validate: function (val) {
+                return !idArray.includes(val)
+            }
         },
         {
             name: "email",
             type: "input",
             message: "What is their email?",
-            // validate: function (val) {
-            //     return val.includes("@")
-            // }
+            validate: function (val) {
+                return val.includes("@")
+            }
         },
         {
             name: "school",
             type: "input",
             message: "What is the name of the school of the team member?",
-            // validate: function (val) {
-            //     return val.length > 0
-            // }
+            validate: function (val) {
+                return val.length > 0
+            }
         },
     ]
 }
