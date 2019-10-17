@@ -14,11 +14,10 @@ function createCard(empArray) {
             <div class="card-header text-center">${employee.name}</div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item text-monospace text-center text-success">
-                    ${employee.id}</li>
+                    ID: ${employee.id}</li>
                 <li class="list-group-item text-monospace text-center text-success">
-                    ${employee.email}</li>
-                
-
+                    Email: ${employee.email}</li>
+                ${createCardlowerdiv(employee)}
             </ul>
 
         </div>`;
@@ -26,21 +25,23 @@ function createCard(empArray) {
     });
 
 }
-console.log(createCardlowerdiv())
-function createCardlowerdiv(employee){
+
+function createCardlowerdiv(employee) {
     try {
         switch (employee.getRole()) {
             case 'Manager': {
-                `<li class="list-group-item text-monospace text-center text-success">
-                ${employee.officeNumber}</li>`}
+                return `<li class="list-group-item text-monospace text-center text-success">
+                Office Number: ${employee.officeNumber}</li>`}
             case 'Intern': {
-                `<li class="list-group-item text-monospace text-center text-success">
-                ${employee.school}</li>`}
+                return `<li class="list-group-item text-monospace text-center text-success">
+                School: ${employee.school}</li>`}
             case 'Engineer': {
-                `<li class="list-group-item text-monospace text-center text-success">
-                ${employee.GitHubprofile}</li>`}
+                return `<li class="list-group-item text-monospace text-center text-success">
+                GitHub profile: ${employee.GitHubprofile}</li>`}
 
-        }
+            default:
+                console.log("ERR")
+        }  
     } catch (error) {
     console.log(error)
 }
